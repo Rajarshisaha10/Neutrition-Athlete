@@ -1395,5 +1395,1389 @@
       "lunch"
     ],
     "cost_inr": 20
+  },
+  {
+    "name": "Peanut butter sandwich",
+    "category": "combo",
+    "serving_g": 120,
+    "cal": 340,
+    "protein_g": 12,
+    "carbs_g": 38,
+    "fat_g": 16,
+    "fiber_g": 3,
+    "iron_mg": 1.5,
+    "calcium_mg": 60,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 25
+  },
+  {
+    "name": "Sattu drink (roasted gram)",
+    "category": "drink",
+    "serving_g": 200,
+    "cal": 140,
+    "protein_g": 8,
+    "carbs_g": 22,
+    "fat_g": 2,
+    "fiber_g": 3,
+    "iron_mg": 2.5,
+    "calcium_mg": 40,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "pre_workout"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Sabudana khichdi",
+    "category": "grain",
+    "serving_g": 150,
+    "cal": 210,
+    "protein_g": 3,
+    "carbs_g": 38,
+    "fat_g": 6,
+    "fiber_g": 0.5,
+    "iron_mg": 0.8,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Aloo paratha",
+    "category": "combo",
+    "serving_g": 120,
+    "cal": 280,
+    "protein_g": 6,
+    "carbs_g": 36,
+    "fat_g": 12,
+    "fiber_g": 2,
+    "iron_mg": 1.8,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Methi paratha",
+    "category": "combo",
+    "serving_g": 100,
+    "cal": 240,
+    "protein_g": 6,
+    "carbs_g": 30,
+    "fat_g": 10,
+    "fiber_g": 3,
+    "iron_mg": 3.5,
+    "calcium_mg": 60,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Stuffed mooli paratha",
+    "category": "combo",
+    "serving_g": 110,
+    "cal": 250,
+    "protein_g": 5.5,
+    "carbs_g": 32,
+    "fat_g": 11,
+    "fiber_g": 2.5,
+    "iron_mg": 1.2,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Thepla (Gujarati flatbread)",
+    "category": "grain",
+    "serving_g": 60,
+    "cal": 160,
+    "protein_g": 4,
+    "carbs_g": 22,
+    "fat_g": 6,
+    "fiber_g": 2,
+    "iron_mg": 2,
+    "calcium_mg": 35,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack",
+      "lunch"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Vermicelli upma (seviyan)",
+    "category": "grain",
+    "serving_g": 150,
+    "cal": 180,
+    "protein_g": 4,
+    "carbs_g": 32,
+    "fat_g": 4,
+    "fiber_g": 1,
+    "iron_mg": 1,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Besan chilla (gram flour pancake)",
+    "category": "pulse",
+    "serving_g": 80,
+    "cal": 170,
+    "protein_g": 8,
+    "carbs_g": 18,
+    "fat_g": 7,
+    "fiber_g": 3,
+    "iron_mg": 2,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Moong dal chilla",
+    "category": "pulse",
+    "serving_g": 80,
+    "cal": 140,
+    "protein_g": 9,
+    "carbs_g": 16,
+    "fat_g": 4,
+    "fiber_g": 2.5,
+    "iron_mg": 2,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Toor dal (arhar, cooked)",
+    "category": "pulse",
+    "serving_g": 150,
+    "cal": 165,
+    "protein_g": 10,
+    "carbs_g": 26,
+    "fat_g": 1.5,
+    "fiber_g": 4,
+    "iron_mg": 2.5,
+    "calcium_mg": 40,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Urad dal (black gram, cooked)",
+    "category": "pulse",
+    "serving_g": 150,
+    "cal": 170,
+    "protein_g": 11,
+    "carbs_g": 25,
+    "fat_g": 1.8,
+    "fiber_g": 4.5,
+    "iron_mg": 3,
+    "calcium_mg": 55,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Dal makhani",
+    "category": "pulse",
+    "serving_g": 200,
+    "cal": 240,
+    "protein_g": 10,
+    "carbs_g": 28,
+    "fat_g": 10,
+    "fiber_g": 4,
+    "iron_mg": 3,
+    "calcium_mg": 50,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 20
+  },
+  {
+    "name": "Sambar",
+    "category": "pulse",
+    "serving_g": 200,
+    "cal": 130,
+    "protein_g": 6,
+    "carbs_g": 20,
+    "fat_g": 3,
+    "fiber_g": 4,
+    "iron_mg": 2.5,
+    "calcium_mg": 45,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Rasam",
+    "category": "pulse",
+    "serving_g": 200,
+    "cal": 60,
+    "protein_g": 2,
+    "carbs_g": 10,
+    "fat_g": 1.5,
+    "fiber_g": 1,
+    "iron_mg": 1,
+    "calcium_mg": 20,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Paneer bhurji",
+    "category": "dairy",
+    "serving_g": 100,
+    "cal": 220,
+    "protein_g": 14,
+    "carbs_g": 4,
+    "fat_g": 16,
+    "fiber_g": 0.5,
+    "iron_mg": 1,
+    "calcium_mg": 200,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 30
+  },
+  {
+    "name": "Paneer tikka",
+    "category": "dairy",
+    "serving_g": 120,
+    "cal": 250,
+    "protein_g": 16,
+    "carbs_g": 6,
+    "fat_g": 18,
+    "fiber_g": 1,
+    "iron_mg": 1.2,
+    "calcium_mg": 250,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "cost_inr": 40
+  },
+  {
+    "name": "Greek yogurt (plain)",
+    "category": "dairy",
+    "serving_g": 150,
+    "cal": 90,
+    "protein_g": 15,
+    "carbs_g": 5,
+    "fat_g": 0.8,
+    "fiber_g": 0,
+    "iron_mg": 0.2,
+    "calcium_mg": 150,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack",
+      "post_workout"
+    ],
+    "cost_inr": 35
+  },
+  {
+    "name": "Raita (cucumber)",
+    "category": "dairy",
+    "serving_g": 100,
+    "cal": 50,
+    "protein_g": 2.5,
+    "carbs_g": 5,
+    "fat_g": 2,
+    "fiber_g": 0.5,
+    "iron_mg": 0.3,
+    "calcium_mg": 80,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Egg bhurji (scrambled)",
+    "category": "egg",
+    "serving_g": 120,
+    "cal": 200,
+    "protein_g": 14,
+    "carbs_g": 2,
+    "fat_g": 15,
+    "fiber_g": 0,
+    "iron_mg": 2,
+    "calcium_mg": 50,
+    "vitd_iu": 40,
+    "is_veg": 0,
+    "meal_slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Chicken tikka",
+    "category": "meat",
+    "serving_g": 120,
+    "cal": 180,
+    "protein_g": 28,
+    "carbs_g": 4,
+    "fat_g": 6,
+    "fiber_g": 0,
+    "iron_mg": 1.5,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "cost_inr": 40
+  },
+  {
+    "name": "Chicken curry (bone-in)",
+    "category": "meat",
+    "serving_g": 200,
+    "cal": 260,
+    "protein_g": 22,
+    "carbs_g": 8,
+    "fat_g": 16,
+    "fiber_g": 1,
+    "iron_mg": 2,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 35
+  },
+  {
+    "name": "Mutton curry",
+    "category": "meat",
+    "serving_g": 200,
+    "cal": 320,
+    "protein_g": 24,
+    "carbs_g": 6,
+    "fat_g": 22,
+    "fiber_g": 0.5,
+    "iron_mg": 3.5,
+    "calcium_mg": 20,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 60
+  },
+  {
+    "name": "Keema (minced meat)",
+    "category": "meat",
+    "serving_g": 150,
+    "cal": 280,
+    "protein_g": 22,
+    "carbs_g": 5,
+    "fat_g": 18,
+    "fiber_g": 0.5,
+    "iron_mg": 3,
+    "calcium_mg": 18,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 50
+  },
+  {
+    "name": "Tandoori chicken",
+    "category": "meat",
+    "serving_g": 150,
+    "cal": 200,
+    "protein_g": 30,
+    "carbs_g": 3,
+    "fat_g": 8,
+    "fiber_g": 0,
+    "iron_mg": 1.8,
+    "calcium_mg": 18,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 45
+  },
+  {
+    "name": "Pomfret (grilled)",
+    "category": "fish",
+    "serving_g": 120,
+    "cal": 120,
+    "protein_g": 22,
+    "carbs_g": 0,
+    "fat_g": 3,
+    "fiber_g": 0,
+    "iron_mg": 1,
+    "calcium_mg": 30,
+    "vitd_iu": 100,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 50
+  },
+  {
+    "name": "Prawns curry",
+    "category": "fish",
+    "serving_g": 150,
+    "cal": 160,
+    "protein_g": 20,
+    "carbs_g": 6,
+    "fat_g": 6,
+    "fiber_g": 0.5,
+    "iron_mg": 2.5,
+    "calcium_mg": 80,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 55
+  },
+  {
+    "name": "Sardines (canned)",
+    "category": "fish",
+    "serving_g": 100,
+    "cal": 208,
+    "protein_g": 25,
+    "carbs_g": 0,
+    "fat_g": 11,
+    "fiber_g": 0,
+    "iron_mg": 2.9,
+    "calcium_mg": 382,
+    "vitd_iu": 270,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 30
+  },
+  {
+    "name": "Fish fry (local river fish)",
+    "category": "fish",
+    "serving_g": 100,
+    "cal": 180,
+    "protein_g": 20,
+    "carbs_g": 5,
+    "fat_g": 9,
+    "fiber_g": 0,
+    "iron_mg": 1.5,
+    "calcium_mg": 40,
+    "vitd_iu": 50,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 35
+  },
+  {
+    "name": "Bhindi (okra) sabzi",
+    "category": "veg",
+    "serving_g": 100,
+    "cal": 70,
+    "protein_g": 2,
+    "carbs_g": 8,
+    "fat_g": 3,
+    "fiber_g": 3,
+    "iron_mg": 1,
+    "calcium_mg": 80,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Baingan bharta",
+    "category": "veg",
+    "serving_g": 150,
+    "cal": 100,
+    "protein_g": 2.5,
+    "carbs_g": 12,
+    "fat_g": 5,
+    "fiber_g": 3,
+    "iron_mg": 0.8,
+    "calcium_mg": 18,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Lauki (bottle gourd) sabzi",
+    "category": "veg",
+    "serving_g": 150,
+    "cal": 60,
+    "protein_g": 1.5,
+    "carbs_g": 10,
+    "fat_g": 2,
+    "fiber_g": 2,
+    "iron_mg": 0.5,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Palak paneer",
+    "category": "combo",
+    "serving_g": 200,
+    "cal": 280,
+    "protein_g": 14,
+    "carbs_g": 10,
+    "fat_g": 20,
+    "fiber_g": 3,
+    "iron_mg": 4,
+    "calcium_mg": 300,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 35
+  },
+  {
+    "name": "Matar paneer",
+    "category": "combo",
+    "serving_g": 200,
+    "cal": 260,
+    "protein_g": 13,
+    "carbs_g": 14,
+    "fat_g": 16,
+    "fiber_g": 3,
+    "iron_mg": 2,
+    "calcium_mg": 200,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 30
+  },
+  {
+    "name": "Rajma chawal (full plate)",
+    "category": "combo",
+    "serving_g": 350,
+    "cal": 450,
+    "protein_g": 16,
+    "carbs_g": 70,
+    "fat_g": 8,
+    "fiber_g": 8,
+    "iron_mg": 4,
+    "calcium_mg": 60,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch"
+    ],
+    "cost_inr": 25
+  },
+  {
+    "name": "Chole bhature (1 serving)",
+    "category": "combo",
+    "serving_g": 250,
+    "cal": 450,
+    "protein_g": 12,
+    "carbs_g": 52,
+    "fat_g": 22,
+    "fiber_g": 5,
+    "iron_mg": 3.5,
+    "calcium_mg": 55,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "breakfast"
+    ],
+    "cost_inr": 30
+  },
+  {
+    "name": "Biryani (chicken, 1 plate)",
+    "category": "combo",
+    "serving_g": 350,
+    "cal": 500,
+    "protein_g": 22,
+    "carbs_g": 60,
+    "fat_g": 18,
+    "fiber_g": 2,
+    "iron_mg": 2.5,
+    "calcium_mg": 35,
+    "vitd_iu": 0,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 50
+  },
+  {
+    "name": "Veg biryani (1 plate)",
+    "category": "combo",
+    "serving_g": 300,
+    "cal": 380,
+    "protein_g": 8,
+    "carbs_g": 58,
+    "fat_g": 12,
+    "fiber_g": 3,
+    "iron_mg": 2,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 35
+  },
+  {
+    "name": "Egg fried rice",
+    "category": "combo",
+    "serving_g": 250,
+    "cal": 360,
+    "protein_g": 12,
+    "carbs_g": 50,
+    "fat_g": 12,
+    "fiber_g": 1.5,
+    "iron_mg": 2,
+    "calcium_mg": 30,
+    "vitd_iu": 20,
+    "is_veg": 0,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 25
+  },
+  {
+    "name": "Dahi vada (2 pieces)",
+    "category": "combo",
+    "serving_g": 150,
+    "cal": 200,
+    "protein_g": 6,
+    "carbs_g": 28,
+    "fat_g": 7,
+    "fiber_g": 2,
+    "iron_mg": 1.5,
+    "calcium_mg": 80,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "lunch"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Mushroom (cooked)",
+    "category": "veg",
+    "serving_g": 100,
+    "cal": 35,
+    "protein_g": 3,
+    "carbs_g": 4,
+    "fat_g": 0.5,
+    "fiber_g": 1.5,
+    "iron_mg": 0.5,
+    "calcium_mg": 3,
+    "vitd_iu": 7,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner",
+      "breakfast"
+    ],
+    "cost_inr": 20
+  },
+  {
+    "name": "Beetroot (boiled)",
+    "category": "veg",
+    "serving_g": 100,
+    "cal": 44,
+    "protein_g": 1.7,
+    "carbs_g": 10,
+    "fat_g": 0.2,
+    "fiber_g": 2,
+    "iron_mg": 0.8,
+    "calcium_mg": 16,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Corn on the cob (boiled)",
+    "category": "veg",
+    "serving_g": 150,
+    "cal": 130,
+    "protein_g": 4,
+    "carbs_g": 27,
+    "fat_g": 1.5,
+    "fiber_g": 3,
+    "iron_mg": 0.7,
+    "calcium_mg": 5,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Makhana (fox nuts, roasted)",
+    "category": "nut",
+    "serving_g": 30,
+    "cal": 110,
+    "protein_g": 4,
+    "carbs_g": 20,
+    "fat_g": 0.5,
+    "fiber_g": 1.5,
+    "iron_mg": 1.5,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "pre_workout"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Cashew nuts (handful)",
+    "category": "nut",
+    "serving_g": 30,
+    "cal": 170,
+    "protein_g": 5,
+    "carbs_g": 9,
+    "fat_g": 13,
+    "fiber_g": 1,
+    "iron_mg": 1.9,
+    "calcium_mg": 12,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 20
+  },
+  {
+    "name": "Walnuts (5-6 halves)",
+    "category": "nut",
+    "serving_g": 25,
+    "cal": 165,
+    "protein_g": 4,
+    "carbs_g": 3.5,
+    "fat_g": 16,
+    "fiber_g": 1.7,
+    "iron_mg": 0.7,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "breakfast"
+    ],
+    "cost_inr": 18
+  },
+  {
+    "name": "Trail mix (nuts + seeds)",
+    "category": "nut",
+    "serving_g": 40,
+    "cal": 200,
+    "protein_g": 6,
+    "carbs_g": 14,
+    "fat_g": 14,
+    "fiber_g": 2,
+    "iron_mg": 1.5,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "pre_workout"
+    ],
+    "cost_inr": 25
+  },
+  {
+    "name": "Apple (medium)",
+    "category": "fruit",
+    "serving_g": 180,
+    "cal": 95,
+    "protein_g": 0.5,
+    "carbs_g": 25,
+    "fat_g": 0.3,
+    "fiber_g": 4,
+    "iron_mg": 0.2,
+    "calcium_mg": 10,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "breakfast"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Orange (medium)",
+    "category": "fruit",
+    "serving_g": 150,
+    "cal": 62,
+    "protein_g": 1.2,
+    "carbs_g": 15,
+    "fat_g": 0.2,
+    "fiber_g": 3,
+    "iron_mg": 0.1,
+    "calcium_mg": 52,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "breakfast",
+      "post_workout"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Watermelon (2 cups)",
+    "category": "fruit",
+    "serving_g": 300,
+    "cal": 90,
+    "protein_g": 1.7,
+    "carbs_g": 22,
+    "fat_g": 0.5,
+    "fiber_g": 1.2,
+    "iron_mg": 0.7,
+    "calcium_mg": 21,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "post_workout"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Grapes (1 cup)",
+    "category": "fruit",
+    "serving_g": 150,
+    "cal": 104,
+    "protein_g": 1.1,
+    "carbs_g": 27,
+    "fat_g": 0.2,
+    "fiber_g": 1.4,
+    "iron_mg": 0.5,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Chana jor garam",
+    "category": "pulse",
+    "serving_g": 50,
+    "cal": 180,
+    "protein_g": 8,
+    "carbs_g": 24,
+    "fat_g": 5,
+    "fiber_g": 4,
+    "iron_mg": 2,
+    "calcium_mg": 30,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Murmura (puffed rice)",
+    "category": "grain",
+    "serving_g": 30,
+    "cal": 110,
+    "protein_g": 2,
+    "carbs_g": 25,
+    "fat_g": 0.3,
+    "fiber_g": 0.5,
+    "iron_mg": 2.8,
+    "calcium_mg": 8,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Black coffee",
+    "category": "drink",
+    "serving_g": 200,
+    "cal": 5,
+    "protein_g": 0.3,
+    "carbs_g": 0,
+    "fat_g": 0,
+    "fiber_g": 0,
+    "iron_mg": 0.1,
+    "calcium_mg": 5,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "pre_workout",
+      "breakfast"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Green tea",
+    "category": "drink",
+    "serving_g": 200,
+    "cal": 2,
+    "protein_g": 0,
+    "carbs_g": 0,
+    "fat_g": 0,
+    "fiber_g": 0,
+    "iron_mg": 0.1,
+    "calcium_mg": 3,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "pre_workout",
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Protein shake (whey + banana + milk)",
+    "category": "combo",
+    "serving_g": 350,
+    "cal": 320,
+    "protein_g": 32,
+    "carbs_g": 35,
+    "fat_g": 5,
+    "fiber_g": 2,
+    "iron_mg": 0.5,
+    "calcium_mg": 200,
+    "vitd_iu": 40,
+    "is_veg": 1,
+    "meal_slots": [
+      "post_workout",
+      "breakfast"
+    ],
+    "cost_inr": 40
+  },
+  {
+    "name": "Peanut chutney",
+    "category": "nut",
+    "serving_g": 30,
+    "cal": 90,
+    "protein_g": 3,
+    "carbs_g": 4,
+    "fat_g": 7,
+    "fiber_g": 1,
+    "iron_mg": 0.5,
+    "calcium_mg": 12,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Coconut chutney",
+    "category": "veg",
+    "serving_g": 30,
+    "cal": 60,
+    "protein_g": 0.7,
+    "carbs_g": 3,
+    "fat_g": 5,
+    "fiber_g": 1.5,
+    "iron_mg": 0.3,
+    "calcium_mg": 5,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 5
+  },
+  {
+    "name": "Pickle (mixed, 1 tbsp)",
+    "category": "veg",
+    "serving_g": 15,
+    "cal": 20,
+    "protein_g": 0.3,
+    "carbs_g": 2,
+    "fat_g": 1.5,
+    "fiber_g": 0.5,
+    "iron_mg": 0.5,
+    "calcium_mg": 10,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 2
+  },
+  {
+    "name": "Jaggery (gur, small piece)",
+    "category": "grain",
+    "serving_g": 20,
+    "cal": 76,
+    "protein_g": 0.2,
+    "carbs_g": 19,
+    "fat_g": 0,
+    "fiber_g": 0,
+    "iron_mg": 2.2,
+    "calcium_mg": 16,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack",
+      "post_workout"
+    ],
+    "cost_inr": 3
+  },
+  {
+    "name": "Honey (1 tbsp)",
+    "category": "grain",
+    "serving_g": 21,
+    "cal": 64,
+    "protein_g": 0.1,
+    "carbs_g": 17,
+    "fat_g": 0,
+    "fiber_g": 0,
+    "iron_mg": 0.1,
+    "calcium_mg": 1,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "pre_workout"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Chia seeds (soaked)",
+    "category": "nut",
+    "serving_g": 15,
+    "cal": 73,
+    "protein_g": 2.5,
+    "carbs_g": 6,
+    "fat_g": 4.5,
+    "fiber_g": 5,
+    "iron_mg": 1.2,
+    "calcium_mg": 95,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Sunflower seeds",
+    "category": "nut",
+    "serving_g": 20,
+    "cal": 116,
+    "protein_g": 4,
+    "carbs_g": 4,
+    "fat_g": 10,
+    "fiber_g": 1.7,
+    "iron_mg": 1,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Pumpkin seeds",
+    "category": "nut",
+    "serving_g": 20,
+    "cal": 110,
+    "protein_g": 5.5,
+    "carbs_g": 3,
+    "fat_g": 9,
+    "fiber_g": 1,
+    "iron_mg": 1.6,
+    "calcium_mg": 9,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Puttu (Kerala rice cake)",
+    "category": "grain",
+    "serving_g": 150,
+    "cal": 220,
+    "protein_g": 4,
+    "carbs_g": 45,
+    "fat_g": 2,
+    "fiber_g": 1.5,
+    "iron_mg": 0.8,
+    "calcium_mg": 12,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Appam",
+    "category": "grain",
+    "serving_g": 80,
+    "cal": 120,
+    "protein_g": 2,
+    "carbs_g": 24,
+    "fat_g": 1.5,
+    "fiber_g": 0.5,
+    "iron_mg": 0.5,
+    "calcium_mg": 8,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "dinner"
+    ],
+    "cost_inr": 8
+  },
+  {
+    "name": "Pongal (ven pongal)",
+    "category": "combo",
+    "serving_g": 200,
+    "cal": 250,
+    "protein_g": 7,
+    "carbs_g": 38,
+    "fat_g": 8,
+    "fiber_g": 2,
+    "iron_mg": 1.5,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 15
+  },
+  {
+    "name": "Litti chokha (Bihar)",
+    "category": "combo",
+    "serving_g": 200,
+    "cal": 350,
+    "protein_g": 10,
+    "carbs_g": 42,
+    "fat_g": 15,
+    "fiber_g": 4,
+    "iron_mg": 3,
+    "calcium_mg": 40,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 20
+  },
+  {
+    "name": "Dhokla (steamed)",
+    "category": "pulse",
+    "serving_g": 100,
+    "cal": 160,
+    "protein_g": 5,
+    "carbs_g": 25,
+    "fat_g": 4,
+    "fiber_g": 2,
+    "iron_mg": 1.5,
+    "calcium_mg": 20,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast",
+      "snack"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Khandvi",
+    "category": "pulse",
+    "serving_g": 80,
+    "cal": 120,
+    "protein_g": 4,
+    "carbs_g": 16,
+    "fat_g": 4,
+    "fiber_g": 1,
+    "iron_mg": 1,
+    "calcium_mg": 15,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "snack"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Uttapam",
+    "category": "grain",
+    "serving_g": 120,
+    "cal": 200,
+    "protein_g": 5,
+    "carbs_g": 32,
+    "fat_g": 5,
+    "fiber_g": 1.5,
+    "iron_mg": 1,
+    "calcium_mg": 20,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 12
+  },
+  {
+    "name": "Pesarattu (green gram dosa)",
+    "category": "pulse",
+    "serving_g": 100,
+    "cal": 170,
+    "protein_g": 9,
+    "carbs_g": 22,
+    "fat_g": 5,
+    "fiber_g": 3,
+    "iron_mg": 2,
+    "calcium_mg": 25,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "breakfast"
+    ],
+    "cost_inr": 10
+  },
+  {
+    "name": "Chapati + sabzi (basic meal)",
+    "category": "combo",
+    "serving_g": 200,
+    "cal": 250,
+    "protein_g": 7,
+    "carbs_g": 35,
+    "fat_g": 8,
+    "fiber_g": 3,
+    "iron_mg": 2,
+    "calcium_mg": 35,
+    "vitd_iu": 0,
+    "is_veg": 1,
+    "meal_slots": [
+      "lunch",
+      "dinner"
+    ],
+    "cost_inr": 15
   }
 ]

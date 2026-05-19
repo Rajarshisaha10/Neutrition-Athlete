@@ -3,3 +3,7 @@ pandas
 scikit-learn
 xgboost
 joblib
+flask
+flask-cors
+groq
+python-dotenv

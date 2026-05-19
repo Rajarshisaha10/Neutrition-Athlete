@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AthleteEdge AI — Fuel the Fight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --white: #F5F0E8;
+  --lime: #C8FF00;
+  --orange: #FF5C1A;
+  --teal: #00E5B4;
+  --red: #FF2D2D;
+  --muted: #2A2A2A;
+  --border: rgba(245,240,232,0.1);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--lime);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 40px; height: 40px;
+  border: 1px solid var(--lime);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.15s ease;
+  mix-blend-mode: difference;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.35;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  background: rgba(5,5,5,0.7);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--lime); }
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--lime); }
+
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--black);
+  padding: 0.6rem 1.5rem;
+  border: none;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 10rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-number {
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(200px, 28vw, 420px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245,240,232,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-tag::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--lime);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 9vw, 140px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+.hero-title .accent { color: var(--lime); }
+.hero-title .stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--white);
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.65);
+  max-width: 480px;
+  margin-bottom: 3rem;
+}
+
+.hero-desc strong { color: var(--white); font-weight: 700; }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--black);
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: none;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--white);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--orange);
+}
+
+.btn-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--white);
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(245,240,232,0.25);
+  cursor: none;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover {
+  border-color: var(--white);
+  background: rgba(245,240,232,0.05);
+}
+
+/* ── HERO RIGHT ── */
+.hero-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.hero-card {
+  width: 340px;
+  background: var(--muted);
+  border: 1px solid rgba(245,240,232,0.08);
+  padding: 2rem;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 2rem;
+  width: 60px; height: 2px;
+  background: var(--lime);
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 1.25rem;
+}
+
+.card-athlete {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.athlete-avatar {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--orange), var(--red));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.athlete-info .name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.athlete-info .sport {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(245,240,232,0.5);
+  letter-spacing: 0.08em;
+}
+
+.macro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.macro-item {
+  background: rgba(245,240,232,0.04);
+  padding: 0.75rem;
+  border-left: 2px solid var(--lime);
+}
+.macro-item.orange { border-color: var(--orange); }
+.macro-item.teal   { border-color: var(--teal); }
+.macro-item.red    { border-color: var(--red); }
+
+.macro-val {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.macro-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+
+.meal-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: rgba(245,240,232,0.7);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(245,240,232,0.05);
+}
+.meal-item:last-child { border-bottom: none; }
+.meal-item .kcal {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--lime);
+}
+
+.hero-card-badge {
+  position: absolute;
+  top: -1rem; right: -1rem;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ── MARQUEE ── */
+.marquee-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  overflow: hidden;
+  background: var(--lime);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 0 2rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.marquee-item::after {
+  content: '◆';
+  font-size: 0.5rem;
+}
+
+/* ── STATS ── */
+.stats-section {
+  padding: 6rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: rgba(245,240,232,0.02); }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5vw, 80px);
+  line-height: 1;
+  color: var(--lime);
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+  margin-bottom: 0.75rem;
+}
+.stat-desc {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.6;
+}
+
+/* ── PROBLEM ── */
+.problem-section {
+  padding: 8rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--orange);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.5vw, 80px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+
+.section-title .lime { color: var(--lime); }
+.section-title .stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--white);
+}
+
+.problem-body {
+  font-size: 1.05rem;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.problem-body strong { color: var(--white); }
+
+.pain-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pain-point {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+  transition: all 0.2s;
+}
+.pain-point:hover { padding-left: 0.5rem; }
+.pain-point:first-child { border-top: 1px solid var(--border); }
+
+.pain-icon {
+  width: 40px; height: 40px;
+  background: rgba(255,92,26,0.1);
+  border: 1px solid rgba(255,92,26,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.pain-content .title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: var(--white);
+}
+.pain-content .desc {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.6;
+}
+
+/* ── FEATURES ── */
+.features-section {
+  padding: 8rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.features-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+
+.features-desc {
+  font-size: 1rem;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.8;
+  align-self: end;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.feature-card {
+  padding: 2.5rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.feature-card:nth-child(3n) { border-right: none; }
+.feature-card:nth-child(n+4) { border-bottom: none; }
+.feature-card:hover { background: rgba(200,255,0,0.03); }
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--lime);
+  transition: width 0.4s ease;
+}
+.feature-card:hover::after { width: 100%; }
+
+.feature-num {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: rgba(245,240,232,0.06);
+  line-height: 1;
+  position: absolute;
+  top: 1rem; right: 1.5rem;
+}
+
+.feature-icon {
+  width: 44px; height: 44px;
+  background: rgba(200,255,0,0.08);
+  border: 1px solid rgba(200,255,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card.orange .feature-icon {
+  background: rgba(255,92,26,0.08);
+  border-color: rgba(255,92,26,0.15);
+}
+.feature-card.teal .feature-icon {
+  background: rgba(0,229,180,0.08);
+  border-color: rgba(0,229,180,0.15);
+}
+.feature-card.orange::after { background: var(--orange); }
+.feature-card.teal::after   { background: var(--teal); }
+
+.feature-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+.feature-body {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.7;
+}
+
+.feature-tag {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lime);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(200,255,0,0.2);
+}
+.feature-card.orange .feature-tag { color: var(--orange); border-color: rgba(255,92,26,0.2); }
+.feature-card.teal   .feature-tag { color: var(--teal);   border-color: rgba(0,229,180,0.2); }
+
+/* ── SPORTS ── */
+.sports-section {
+  padding: 8rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sports-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.sports-header .section-eyebrow { justify-content: center; }
+.sports-header .section-eyebrow::before { display: none; }
+
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.sport-card {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  cursor: none;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.sport-card:last-child { border-right: none; }
+
+.sport-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--lime);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+.sport-card:hover::before { transform: translateY(0); }
+.sport-card:hover .sport-name { color: var(--black); }
+.sport-card:hover .sport-emoji { transform: scale(1.3); }
+
+.sport-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+.sport-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.6);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  padding: 8rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
+}
+
+.step {
+  padding: 3rem 2rem 3rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.step:last-child { border-right: none; }
+
+.step-arrow {
+  position: absolute;
+  top: 3rem; right: -1px;
+  width: 24px; height: 24px;
+  background: var(--black);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--lime);
+  z-index: 1;
+}
+.step:last-child .step-arrow { display: none; }
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: rgba(200,255,0,0.06);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+.step-desc {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.7;
+}
+
+/* ── TESTIMONIAL / QUOTE ── */
+.quote-section {
+  padding: 8rem 4rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--muted);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.quote-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.quote-content {}
+
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: 8rem;
+  color: var(--lime);
+  line-height: 0.6;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.quote-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.author-avatar {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--teal), var(--lime));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--black);
+}
+.author-info .name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+.author-info .role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 10rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,255,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 9vw, 140px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.cta-title .stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(245,240,232,0.3);
+}
+.cta-title .lime { color: var(--lime); }
+
+.cta-sub {
+  font-size: 1.05rem;
+  color: rgba(245,240,232,0.55);
+  max-width: 520px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.75;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cta-note {
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.25);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+.footer-logo span { color: var(--lime); }
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--lime); }
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.2);
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── FREE BADGE ── */
+.free-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(200,255,0,0.1);
+  border: 1px solid rgba(200,255,0,0.2);
+  padding: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 2rem;
+}
+.free-badge::before {
+  content: '●';
+  font-size: 0.4rem;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding: 1.25rem 2rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; }
+  .hero-right { display: none; }
+  .hero-bg-number { display: none; }
+  .stats-section { grid-template-columns: 1fr 1fr; padding: 4rem 2rem; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+  .problem-section { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
+  .features-section { padding: 5rem 2rem; }
+  .features-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .feature-card:last-child { border-bottom: none; }
+  .sports-grid { grid-template-columns: repeat(3, 1fr); }
+  .sport-card:nth-child(3) { border-right: none; }
+  .sport-card:nth-child(4) { border-top: 1px solid var(--border); }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .step:nth-child(2) { border-right: none; }
+  .step:nth-child(3) { border-top: 1px solid var(--border); }
+  .quote-section { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 2rem; }
+  .quote-label { writing-mode: horizontal-tb; transform: none; }
+  .cta-section { padding: 6rem 2rem; }
+  .sports-section, .how-section { padding: 5rem 2rem; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Athlete<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="/nutrition">Nutrition</a></li>
+    <li><a href="/injuries">Injuries</a></li>
+  </ul>
+  <a href="/nutrition" class="nav-cta">Get meal plan</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="free-badge">100% Free — No Paywall Ever</div>
+    <div class="hero-tag">AI-Powered Sports Nutrition</div>
+    <h1 class="hero-title">
+      FUEL<br>
+      THE<br>
+      <span class="accent">FIGHT</span>
+    </h1>
+    <p class="hero-desc">
+      India has <strong>500 million young athletes.</strong> Most train hard with zero access to nutrition guidance. <strong>AthleteEdge AI</strong> changes that — sport-specific meal plans, injury recovery, and performance coaching. Free. Forever.
+    </p>
+    <div class="hero-actions">
+      <a href="/nutrition" class="btn-primary">Start for free →</a>
+      <a href="#features" class="btn-secondary">See how it works</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-badge">Match Day</div>
+      <div class="card-label">// Today's meal plan</div>
+      <div class="card-athlete">
+        <div class="athlete-avatar">R</div>
+        <div class="athlete-info">
+          <div class="name">Rahul Singh</div>
+          <div class="sport">Cricket · Fast Bowler · 22y · 72kg</div>
+        </div>
+      </div>
+      <div class="macro-grid">
+        <div class="macro-item">
+          <div class="macro-val">2840</div>
+          <div class="macro-label">Calories (kcal)</div>
+        </div>
+        <div class="macro-item orange">
+          <div class="macro-val">148g</div>
+          <div class="macro-label">Protein</div>
+        </div>
+        <div class="macro-item teal">
+          <div class="macro-val">355g</div>
+          <div class="macro-label">Carbs</div>
+        </div>
+        <div class="macro-item red">
+          <div class="macro-val">72g</div>
+          <div class="macro-label">Fat</div>
+        </div>
+      </div>
+      <div class="meal-list">
+        <div class="meal-item"><span>🌅 Bajra roti + Egg bhurji + Milk</span><span class="kcal">710 kcal</span></div>
+        <div class="meal-item"><span>☀️ Rice + Chicken curry + Dal</span><span class="kcal">980 kcal</span></div>
+        <div class="meal-item"><span>⚡ Banana + Peanuts + Sattu</span><span class="kcal">285 kcal</span></div>
+        <div class="meal-item"><span>🍽️ Roti + Paneer + Sabzi</span><span class="kcal">720 kcal</span></div>
+        <div class="meal-item"><span>💪 Curd + Tuna + Coconut water</span><span class="kcal">145 kcal</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bg-number">500M</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">Cricket</div>
+    <div class="marquee-item">Kabaddi</div>
+    <div class="marquee-item">Football</div>
+    <div class="marquee-item">Wrestling</div>
+    <div class="marquee-item">Athletics</div>
+    <div class="marquee-item">Badminton</div>
+    <div class="marquee-item">Zero Cost</div>
+    <div class="marquee-item">Offline Mode</div>
+    <div class="marquee-item">6 Languages</div>
+    <div class="marquee-item">Cricket</div>
+    <div class="marquee-item">Kabaddi</div>
+    <div class="marquee-item">Football</div>
+    <div class="marquee-item">Wrestling</div>
+    <div class="marquee-item">Athletics</div>
+    <div class="marquee-item">Badminton</div>
+    <div class="marquee-item">Zero Cost</div>
+    <div class="marquee-item">Offline Mode</div>
+    <div class="marquee-item">6 Languages</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stat-item reveal">
+    <div class="stat-num">500M</div>
+    <div class="stat-label">Young athletes in India</div>
+    <div class="stat-desc">Training daily with no professional nutritional guidance whatsoever.</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">₹0</div>
+    <div class="stat-label">Cost to the athlete</div>
+    <div class="stat-desc">No subscription, no paywall, no hardware. Free, forever, for everyone.</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">6+</div>
+    <div class="stat-label">Indian languages</div>
+    <div class="stat-desc">Hindi, Bengali, Tamil, Telugu, Marathi and more from day one.</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">60+</div>
+    <div class="stat-label">Local Indian foods</div>
+    <div class="stat-desc">Dal, roti, bajra, sattu — not expensive Western supplements.</div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div>
+    <div class="section-eyebrow">The problem</div>
+    <h2 class="section-title">
+      TALENT<br>
+      IS NOT<br>
+      <span class="lime">ENOUGH</span>
+    </h2>
+    <p class="problem-body">
+      ₹500–₹2,000 per nutritionist session. Unaffordable for most grassroots athletes. The gap isn't talent — it's access. <strong>Early career endings not from injury, but from ignorance.</strong>
+    </p>
+  </div>
+  <div class="pain-points reveal">
+    <div class="pain-point">
+      <div class="pain-icon">🩹</div>
+      <div class="pain-content">
+        <div class="title">Training through injuries</div>
+        <div class="desc">Without professional guidance, players train through pain and risk permanent damage to joints, muscles, and careers.</div>
+      </div>
+    </div>
+    <div class="pain-point">
+      <div class="pain-icon">📱</div>
+      <div class="pain-content">
+        <div class="title">Unverified YouTube advice</div>
+        <div class="desc">Misinformation designed for Western gyms, not Indian kabaddi players or cricket fast bowlers in Tier 3 cities.</div>
+      </div>
+    </div>
+    <div class="pain-point">
+      <div class="pain-icon">🩸</div>
+      <div class="pain-content">
+        <div class="title">Preventable deficiencies</div>
+        <div class="desc">Iron, calcium, and Vitamin-D deficiencies silently destroying performance with no one to flag them.</div>
+      </div>
+    </div>
+    <div class="pain-point">
+      <div class="pain-icon">🏙️</div>
+      <div class="pain-content">
+        <div class="title">Urban-only solutions</div>
+        <div class="desc">HealthifyMe, Cult.fit, Fittr — all built for urban fitness, not competitive grassroots athletes in rural India.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="features-header">
+    <div>
+      <div class="section-eyebrow">The solution</div>
+      <h2 class="section-title reveal">
+        YOUR<br>
+        PERSONAL<br>
+        <span class="lime">EDGE</span>
+      </h2>
+    </div>
+    <p class="features-desc reveal reveal-delay-1">
+      AthleteEdge AI is not another fitness tracker. It's a sports medicine assistant built specifically for Indian competitive athletes — combining nutrition, recovery, and performance coaching in one free smartphone app.
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-num">01</div>
+      <div class="feature-icon">🍛</div>
+      <div class="feature-title">Sport-specific nutrition</div>
+      <div class="feature-body">Personalised meal plans based on your sport, age, weight, and training intensity — built from dal, roti, and local Indian staples. Not whey protein powder.</div>
+      <div class="feature-tag">Nutrition Engine</div>
+    </div>
+    <div class="feature-card orange reveal reveal-delay-1">
+      <div class="feature-num">02</div>
+      <div class="feature-icon">🏥</div>
+      <div class="feature-title">Injury recovery guidance</div>
+      <div class="feature-body">Describe your pain. Get sport-specific recovery exercises, rest protocols, and post-match hydration plans. Knows when to say "see a doctor."</div>
+      <div class="feature-tag">Recovery Engine</div>
+    </div>
+    <div class="feature-card teal reveal reveal-delay-2">
+      <div class="feature-num">03</div>
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Fatigue & overtraining</div>
+      <div class="feature-body">Track training load, session duration, and recovery days. Get alerts before overtraining becomes injury — not after.</div>
+      <div class="feature-tag">Performance Tracking</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-num">04</div>
+      <div class="feature-icon">📶</div>
+      <div class="feature-title">Works offline</div>
+      <div class="feature-body">Low-data offline mode built for poor connectivity areas — because that's exactly where most grassroots talent actually lives.</div>
+      <div class="feature-tag">Offline First</div>
+    </div>
+    <div class="feature-card orange reveal reveal-delay-2">
+      <div class="feature-num">05</div>
+      <div class="feature-icon">🗣️</div>
+      <div class="feature-title">Full vernacular support</div>
+      <div class="feature-body">Hindi, Bengali, Tamil, Telugu, Marathi and more — from day one. Because a wrestler in Haryana shouldn't need English to get nutrition advice.</div>
+      <div class="feature-tag">6+ Languages</div>
+    </div>
+    <div class="feature-card teal reveal reveal-delay-3">
+      <div class="feature-num">06</div>
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Always free</div>
+      <div class="feature-body">No subscription. No paywall. No hardware required. The socioeconomic gap in sports support ends here — for every athlete, in every village.</div>
+      <div class="feature-tag">₹0 Forever</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPORTS -->
+<section class="sports-section" id="sports">
+  <div class="sports-header">
+    <div class="section-eyebrow">Sport-specific protocols</div>
+    <h2 class="section-title reveal">
+      BUILT FOR<br>
+      <span class="lime">YOUR</span> SPORT
+    </h2>
+  </div>
+  <div class="sports-grid">
+    <div class="sport-card reveal">
+      <span class="sport-emoji">🏏</span>
+      <div class="sport-name">Cricket</div>
+    </div>
+    <div class="sport-card reveal reveal-delay-1">
+      <span class="sport-emoji">🤼</span>
+      <div class="sport-name">Kabaddi</div>
+    </div>
+    <div class="sport-card reveal reveal-delay-2">
+      <span class="sport-emoji">⚽</span>
+      <div class="sport-name">Football</div>
+    </div>
+    <div class="sport-card reveal reveal-delay-3">
+      <span class="sport-emoji">🏃</span>
+      <div class="sport-name">Athletics</div>
+    </div>
+    <div class="sport-card reveal reveal-delay-4">
+      <span class="sport-emoji">🤸</span>
+      <div class="sport-name">Wrestling</div>
+    </div>
+    <div class="sport-card reveal reveal-delay-4">
+      <span class="sport-emoji">🏸</span>
+      <div class="sport-name">Badminton</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-eyebrow">How it works</div>
+  <h2 class="section-title reveal">
+    FOUR STEPS<br>TO YOUR <span class="lime">EDGE</span>
+  </h2>
+  <div class="steps-grid">
+    <div class="step reveal">
+      <div class="step-arrow">→</div>
+      <div class="step-num">01</div>
+      <div class="step-title">Enter your profile</div>
+      <div class="step-desc">Sport, age, weight, training intensity, diet preference — takes 60 seconds. In your language.</div>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-arrow">→</div>
+      <div class="step-num">02</div>
+      <div class="step-title">AI predicts your needs</div>
+      <div class="step-desc">XGBoost models predict your daily calorie, protein, carb, and fat targets — plus micronutrient flags for iron, calcium, and Vitamin-D.</div>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-arrow">→</div>
+      <div class="step-num">03</div>
+      <div class="step-title">Get your meal plan</div>
+      <div class="step-desc">5 meals built from affordable Indian foods. Breakfast, lunch, pre-workout, dinner, post-match recovery — all calibrated to today's training load.</div>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <div class="step-title">Track & recover</div>
+      <div class="step-desc">Log fatigue, describe injuries, get recovery protocols. The app learns your patterns and flags overtraining before it becomes injury.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-label">Impact story</div>
+  <div class="quote-content reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">I trained for 6 years on guesswork and YouTube. My protein was half what it should be for a fast bowler. AthleteEdge told me in 60 seconds what no one ever did — and it was free.</p>
+    <div class="quote-author">
+      <div class="author-avatar">A</div>
+      <div class="author-info">
+        <div class="name">Arjun Mehta</div>
+        <div class="role">U-19 Fast Bowler · Rajasthan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-bg"></div>
+  <div class="section-eyebrow" style="justify-content:center;margin-bottom:2rem;">
+    <span style="width:30px;height:1px;background:var(--lime);display:inline-block;margin-right:0.75rem;"></span>
+    Join the movement
+  </div>
+  <h2 class="cta-title reveal">
+    YOUR<br>
+    <span class="lime">TALENT</span><br>
+    <span class="stroke">DESERVES</span><br>
+    BETTER
+  </h2>
+  <p class="cta-sub reveal reveal-delay-1">
+    No subscription. No English required. No expensive supplements. Just science-backed nutrition for the athlete you already are.
+  </p>
+  <div class="cta-actions reveal reveal-delay-2">
+    <a href="/nutrition" class="btn-primary">Generate Meal Plan →</a>
+    <a href="#" class="btn-secondary">View on GitHub</a>
+  </div>
+  <p class="cta-note reveal reveal-delay-3">Free forever · Works offline · 6+ Indian languages · No hardware needed</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Athlete<span>Edge</span> AI</div>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 AthleteEdge AI. MIT License.</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top  = my - 6 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx - 20) * 0.12;
+  ry += (my - ry - 20) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2.5)';
+    ring.style.transform = 'scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const counters = document.querySelectorAll('.stat-num');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const text = el.textContent;
+      if (text.includes('M') || text.includes('₹') || text.includes('+')) return;
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+</script>
+</body>
+</html>

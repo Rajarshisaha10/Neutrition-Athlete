@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition Planner — AthleteEdge AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/nutrition.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Athlete<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/nutrition" class="active">Nutrition</a></li>
+    <li><a href="/injuries">Injuries</a></li>
+  </ul>
+  <a href="/nutrition" class="nav-cta">Get meal plan</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-tag">AI-Powered Nutrition Engine</div>
+  <h1 class="hero-title">FUEL<br>YOUR <span class="accent">BODY</span></h1>
+  <p class="hero-desc">Enter your athlete profile. Our XGBoost models predict your exact macro targets, then build a 5-meal plan from affordable Indian foods.</p>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+  <form id="mealForm" autocomplete="off">
+
+    <!-- Step 1: Personal -->
+    <div class="form-group">
+      <div class="group-header">
+        <span class="group-num">01</span>
+        <div>
+          <div class="group-title">Personal Info</div>
+          <div class="group-sub">Tell us about yourself</div>
+        </div>
+      </div>
+      <div class="fields-grid">
+        <div class="field"><label for="name">Name</label><input type="text" id="name" placeholder="Your name" value="Athlete"></div>
+        <div class="field"><label for="sport">Sport</label>
+          <select id="sport"><option>Cricket</option><option>Football</option><option>Kabaddi</option><option>Athletics</option><option>Wrestling</option><option>Badminton</option></select>
+        </div>
+        <div class="field"><label for="role">Role <span class="opt">(optional)</span></label><input type="text" id="role" placeholder="e.g. Fast bowler"></div>
+        <div class="field"><label>Gender</label>
+          <div class="radio-group"><label class="radio"><input type="radio" name="gender" value="male" checked><span>Male</span></label><label class="radio"><input type="radio" name="gender" value="female"><span>Female</span></label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Body -->
+    <div class="form-group">
+      <div class="group-header">
+        <span class="group-num">02</span>
+        <div><div class="group-title">Body Metrics</div><div class="group-sub">Physical measurements</div></div>
+      </div>
+      <div class="fields-grid">
+        <div class="field"><label for="age">Age (years)</label><input type="number" id="age" value="22" min="10" max="60"></div>
+        <div class="field"><label for="weight">Weight (kg)</label><input type="number" id="weight" value="72" min="30" max="150" step="0.5"></div>
+        <div class="field"><label for="height">Height (cm)</label><input type="number" id="height" value="175" min="120" max="220"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Training -->
+    <div class="form-group">
+      <div class="group-header">
+        <span class="group-num">03</span>
+        <div><div class="group-title">Training Profile</div><div class="group-sub">Today's training details</div></div>
+      </div>
+      <div class="fields-grid">
+        <div class="field span-2"><label for="intensity">Training Intensity: <span id="intensityVal" class="slider-val">8</span>/10</label>
+          <input type="range" id="intensity" min="0" max="10" value="8" class="slider">
+        </div>
+        <div class="field"><label for="duration">Session Duration (min)</label><input type="number" id="duration" value="120" min="15" max="300"></div>
+        <div class="field"><label for="trainingDays">Training Days / Week</label><input type="number" id="trainingDays" value="6" min="1" max="7"></div>
+        <div class="field"><label>Day Type</label>
+          <div class="radio-group tri"><label class="radio"><input type="radio" name="dayType" value="training" checked><span>Training</span></label><label class="radio"><input type="radio" name="dayType" value="match"><span>Match</span></label><label class="radio"><input type="radio" name="dayType" value="recovery"><span>Recovery</span></label></div>
+        </div>
+        <div class="field span-2"><label for="fatigue">Fatigue Score: <span id="fatigueVal" class="slider-val">6</span>/10</label>
+          <input type="range" id="fatigue" min="1" max="10" value="6" class="slider fatigue-slider">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Goals -->
+    <div class="form-group">
+      <div class="group-header">
+        <span class="group-num">04</span>
+        <div><div class="group-title">Goal & Diet</div><div class="group-sub">What are you optimizing for?</div></div>
+      </div>
+      <div class="fields-grid">
+        <div class="field"><label>Goal</label>
+          <div class="radio-group tri"><label class="radio"><input type="radio" name="goal" value="maintain" checked><span>Maintain</span></label><label class="radio"><input type="radio" name="goal" value="bulk"><span>Bulk</span></label><label class="radio"><input type="radio" name="goal" value="cut"><span>Cut</span></label></div>
+        </div>
+        <div class="field"><label>Diet Preference</label>
+          <div class="radio-group"><label class="radio"><input type="radio" name="diet" value="veg"><span>Veg</span></label><label class="radio"><input type="radio" name="diet" value="non-veg" checked><span>Non-Veg</span></label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Budget -->
+    <div class="form-group">
+      <div class="group-header">
+        <span class="group-num">05</span>
+        <div><div class="group-title">Daily Budget</div><div class="group-sub">Affordable meal planning</div></div>
+      </div>
+      <div class="fields-grid">
+        <div class="field span-2"><label>Budget Range (per day)</label>
+          <div class="radio-group tri"><label class="radio"><input type="radio" name="budget" value="low"><span>Rs.50-80</span></label><label class="radio"><input type="radio" name="budget" value="medium" checked><span>Rs.80-150</span></label><label class="radio"><input type="radio" name="budget" value="high"><span>Rs.150-250</span></label></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-generate" id="submitBtn">
+      <span class="btn-text">Generate Meal Plan →</span>
+      <span class="btn-loading" style="display:none;">
+        <span class="spinner"></span> Analyzing...
+      </span>
+    </button>
+  </form>
+</section>
+
+<!-- ERROR -->
+<div class="error-banner" id="errorBanner" style="display:none;">
+  <span class="error-icon">[!]</span>
+  <span id="errorMsg"></span>
+</div>
+
+<!-- RESULTS -->
+<section class="results-section" id="results" style="display:none;">
+  <div class="results-header">
+    <div class="section-eyebrow">Your Personalized Plan</div>
+    <h2 class="results-title">MEAL <span class="accent">PLAN</span></h2>
+    <div id="athleteInfo" class="athlete-badge"></div>
+  </div>
+
+  <!-- Macro Targets -->
+  <div class="macro-dashboard" id="macroDash"></div>
+
+  <!-- Micro Flags -->
+  <div class="micro-flags" id="microFlags"></div>
+
+  <!-- Meal Cards -->
+  <div class="meals-container" id="mealsContainer"></div>
+
+  <!-- Daily Tip -->
+  <div class="daily-tip" id="dailyTip" style="display:none;"></div>
+
+  <div class="results-actions">
+    <button class="btn-primary" onclick="window.print()">Print Plan</button>
+    <button class="btn-secondary" onclick="document.getElementById('results').style.display='none';window.scrollTo({top:document.getElementById('form').offsetTop-100,behavior:'smooth'})">New Plan</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Athlete<span>Edge</span> AI</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/nutrition">Nutrition</a></li>
+    <li><a href="/injuries">Recovery</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 AthleteEdge AI. MIT License.</div>
+</footer>
+
+<script>
+// Sliders
+document.getElementById('intensity').addEventListener('input', e => {
+  document.getElementById('intensityVal').textContent = e.target.value;
+});
+document.getElementById('fatigue').addEventListener('input', e => {
+  document.getElementById('fatigueVal').textContent = e.target.value;
+});
+
+// Form submit
+document.getElementById('mealForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const errBanner = document.getElementById('errorBanner');
+  const results = document.getElementById('results');
+
+  btn.querySelector('.btn-text').style.display = 'none';
+  btn.querySelector('.btn-loading').style.display = 'inline-flex';
+  btn.disabled = true;
+  errBanner.style.display = 'none';
+  results.style.display = 'none';
+
+  const dayType = document.querySelector('input[name="dayType"]:checked').value;
+  const profile = {
+    name: document.getElementById('name').value || 'Athlete',
+    sport: document.getElementById('sport').value,
+    role: document.getElementById('role').value,
+    gender: document.querySelector('input[name="gender"]:checked').value,
+    age: parseInt(document.getElementById('age').value),
+    weight_kg: parseFloat(document.getElementById('weight').value),
+    height_cm: parseFloat(document.getElementById('height').value),
+    training_intensity: parseInt(document.getElementById('intensity').value),
+    session_duration_min: parseInt(document.getElementById('duration').value),
+    training_days_per_week: parseInt(document.getElementById('trainingDays').value),
+    is_match_day: dayType === 'match' ? 1 : 0,
+    is_recovery_day: dayType === 'recovery' ? 1 : 0,
+    fatigue_score: parseInt(document.getElementById('fatigue').value),
+    goal: document.querySelector('input[name="goal"]:checked').value,
+    diet_type: document.querySelector('input[name="diet"]:checked').value,
+    budget: document.querySelector('input[name="budget"]:checked').value,
+  };
+
+  try {
+    const resp = await fetch('/api/meal-plan', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(profile),
+    });
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Server error');
+    renderResults(data);
+  } catch (err) {
+    errBanner.style.display = 'flex';
+    document.getElementById('errorMsg').textContent = err.message;
+  } finally {
+    btn.querySelector('.btn-text').style.display = 'inline';
+    btn.querySelector('.btn-loading').style.display = 'none';
+    btn.disabled = false;
+  }
+});
+
+function renderResults(data) {
+  const results = document.getElementById('results');
+  const p = data.profile;
+  const dayLabel = p.day_type || (p.is_match_day ? '🏆 Match Day' : p.is_recovery_day ? '😴 Recovery' : '🏋️ Training');
+
+  // Athlete info badge
+  document.getElementById('athleteInfo').innerHTML =
+    `<span class="badge-name">${p.name}</span>` +
+    `<span class="badge-sep">·</span>${p.sport}` +
+    (p.role ? `<span class="badge-sep">·</span>${p.role}` : '') +
+    `<span class="badge-sep">·</span>${p.age}y · ${p.weight_kg}kg` +
+    `<span class="badge-sep">·</span>${dayLabel}` +
+    `<span class="badge-sep">·</span>${p.goal.toUpperCase()} · ${p.diet_type.toUpperCase()}`;
+
+  // Macro dashboard
+  const t = data.targets;
+  document.getElementById('macroDash').innerHTML = `
+    <div class="macro-card cal"><div class="macro-value">${t.calories}</div><div class="macro-label">Calories (kcal)</div></div>
+    <div class="macro-card pro"><div class="macro-value">${t.protein_g}g</div><div class="macro-label">Protein</div></div>
+    <div class="macro-card carb"><div class="macro-value">${t.carbs_g}g</div><div class="macro-label">Carbs</div></div>
+    <div class="macro-card fat"><div class="macro-value">${t.fat_g}g</div><div class="macro-label">Fat</div></div>`;
+
+  // Micro flags
+  const flags = data.targets;
+  let flagHTML = '';
+  if (flags.needs_iron) flagHTML += '<div class="flag iron">[Fe] Iron Focus</div>';
+  if (flags.needs_calcium) flagHTML += '<div class="flag calcium">[Ca] Calcium Focus</div>';
+  if (flags.needs_vitd) flagHTML += '<div class="flag vitd">[D] Vitamin-D Focus</div>';
+  document.getElementById('microFlags').innerHTML = flagHTML;
+  document.getElementById('microFlags').style.display = flagHTML ? 'flex' : 'none';
+
+  // Meal cards — new Groq format
+  const plan = data.plan;
+  const container = document.getElementById('mealsContainer');
+  const slotIcons = {'Breakfast':'//','Pre-Workout':'>>','Lunch':'//','Post-Workout':'>>','Dinner':'//'};
+
+  container.innerHTML = plan.meals.map(meal => {
+    const items = meal.items.map(item =>
+      `<div class="meal-food"><span class="food-bullet">></span><span class="food-name">${item}</span></div>`
+    ).join('');
+
+    return `<div class="meal-card">
+      <div class="meal-header">
+        <span class="meal-slot-name">${meal.slot}</span>
+        <span class="meal-cals">${meal.approx_cal} kcal | ${meal.approx_protein}g protein${meal.approx_cost ? ' | ~Rs.' + meal.approx_cost : ''}</span>
+      </div>
+      <div class="meal-foods">${items}</div>
+      <div class="meal-why"><span class="why-label">Why:</span> ${meal.why}</div>
+    </div>`;
+  }).join('');
+
+  // Daily tip
+  const tipEl = document.getElementById('dailyTip');
+  if (plan.daily_total && plan.daily_total.tip) {
+    let modeTag = plan.mode === 'offline' ? ' [OFFLINE MODE]' : '';
+    let validTag = plan.validation && plan.validation.within_range ? ' | Accuracy: ' + plan.validation.cal_accuracy + ' cal, ' + plan.validation.protein_accuracy + ' protein' : '';
+    tipEl.innerHTML = `<span class="tip-icon">[i]</span><span class="tip-text"><strong>Daily Total: ~${plan.daily_total.cal} kcal | ${plan.daily_total.protein}g protein${modeTag}${validTag}</strong><br>${plan.daily_total.tip}</span>`;
+    tipEl.style.display = 'flex';
+  } else {
+    tipEl.style.display = 'none';
+  }
+
+  results.style.display = 'block';
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
+

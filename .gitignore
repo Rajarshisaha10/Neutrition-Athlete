@@ -1,0 +1,61 @@
+# Bytecode / caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Virtual environments / local installs
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Generated data, trained models, and local outputs
+data/*.csv
+data/*.parquet
+data/*.pkl
+models/
+*.joblib
+*.pkl
+output.txt
+outputs/
+logs/
+*.log
+
+# Keep curated JSON food database tracked
+!data/food_db.json
+
+# Notebooks and notebook caches
+.ipynb_checkpoints/
+*.ipynb
+
+# Flask / runtime
+instance/
+.webassets-cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

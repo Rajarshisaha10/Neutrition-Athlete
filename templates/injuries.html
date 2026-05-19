@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Injury Recovery — AthleteEdge AI</title>
+<meta name="description" content="AthleteEdge AI Injury Recovery engine — sport-specific recovery guidance for Indian athletes. Currently under development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --white: #F5F0E8;
+  --lime: #C8FF00;
+  --orange: #FF5C1A;
+  --teal: #00E5B4;
+  --red: #FF2D2D;
+  --muted: #2A2A2A;
+  --border: rgba(245,240,232,0.1);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  background: rgba(5,5,5,0.7);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--lime); }
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--lime); }
+.nav-links a.active { color: var(--lime); }
+
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--black);
+  padding: 0.6rem 1.5rem;
+  border: none;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--white); }
+
+/* ── MAIN CONTENT ── */
+.maintenance-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background animated grid */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(60px, 60px); }
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--lime);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 8s ease-in-out infinite;
+}
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; top: 60%; animation-delay: 1.5s; }
+.particle:nth-child(3) { left: 70%; top: 30%; animation-delay: 3s; }
+.particle:nth-child(4) { left: 85%; top: 70%; animation-delay: 4.5s; }
+.particle:nth-child(5) { left: 50%; top: 45%; animation-delay: 6s; }
+.particle:nth-child(6) { left: 20%; top: 80%; animation-delay: 2s; }
+.particle:nth-child(7) { left: 60%; top: 15%; animation-delay: 5s; }
+.particle:nth-child(8) { left: 90%; top: 50%; animation-delay: 7s; }
+
+@keyframes particleFloat {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  20% { opacity: 0.6; }
+  50% { opacity: 0.3; transform: translateY(-40px) scale(1.5); }
+  80% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
+}
+
+.maintenance-card {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 700px;
+  padding: 5rem 4rem;
+  background: rgba(42,42,42,0.4);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.maintenance-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 3rem;
+  width: 80px; height: 2px;
+  background: var(--orange);
+}
+
+.maintenance-card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; right: 3rem;
+  width: 80px; height: 2px;
+  background: var(--orange);
+}
+
+.maint-icon {
+  width: 100px; height: 100px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.wrench {
+  font-size: 3.5rem;
+  display: block;
+  animation: wrenchSpin 4s ease-in-out infinite;
+}
+
+@keyframes wrenchSpin {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+  border: 1px solid rgba(255,92,26,0.3);
+  border-radius: 50%;
+  animation: pulseRing 3s ease-out infinite;
+}
+
+.pulse-ring:nth-child(2) { animation-delay: 1s; }
+.pulse-ring:nth-child(3) { animation-delay: 2s; }
+
+@keyframes pulseRing {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+.maint-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.maint-tag .dot {
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.maint-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.maint-title .orange { color: var(--orange); }
+.maint-title .stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--white);
+}
+
+.maint-desc {
+  font-size: 1rem;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+}
+
+.maint-features {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.maint-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255,92,26,0.06);
+  border: 1px solid rgba(255,92,26,0.15);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.6);
+}
+
+.maint-feature .icon { font-size: 0.9rem; }
+
+.maint-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--black);
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--white);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--orange);
+}
+
+.btn-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--white);
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(245,240,232,0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover {
+  border-color: var(--white);
+  background: rgba(245,240,232,0.05);
+}
+
+/* ── STATUS BAR ── */
+.status-bar {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.status-dot.active { background: var(--teal); }
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+.footer-logo span { color: var(--lime); }
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--lime); }
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.2);
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.35;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding: 1.25rem 2rem; }
+  .nav-links { display: none; }
+  .maintenance-card { padding: 3rem 2rem; }
+  .status-bar { padding: 1.5rem 2rem; gap: 2rem; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Athlete<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/nutrition">Nutrition</a></li>
+    <li><a href="/injuries" class="active">Injuries</a></li>
+  </ul>
+  <a href="/nutrition" class="nav-cta">Get meal plan</a>
+</nav>
+
+<!-- MAIN -->
+<div class="maintenance-wrapper">
+  <div class="grid-bg"></div>
+
+  <!-- Floating particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <div class="maintenance-card">
+    <div class="maint-icon">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <span class="wrench">🔧</span>
+    </div>
+
+    <div class="maint-tag">
+      <span class="dot"></span>
+      Under Development
+      <span class="dot"></span>
+    </div>
+
+    <h1 class="maint-title">
+      RECOVERY<br>
+      <span class="orange">ENGINE</span><br>
+      <span class="stroke">COMING</span><br>
+      SOON
+    </h1>
+
+    <p class="maint-desc">
+      Our AI-powered injury recovery module is being built. Sport-specific recovery protocols, 
+      rehabilitation exercises, and return-to-play guidance — all free, all in your language.
+    </p>
+
+    <div class="maint-features">
+      <div class="maint-feature">
+        <span class="icon">🩹</span> Injury Assessment
+      </div>
+      <div class="maint-feature">
+        <span class="icon">🏥</span> Recovery Protocols
+      </div>
+      <div class="maint-feature">
+        <span class="icon">📋</span> Rehab Exercises
+      </div>
+      <div class="maint-feature">
+        <span class="icon">🔄</span> Return-to-Play
+      </div>
+    </div>
+
+    <div class="maint-actions">
+      <a href="/nutrition" class="btn-primary">Try Nutrition Engine →</a>
+      <a href="/" class="btn-secondary">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-item">
+    <div class="status-dot active"></div>
+    <div class="status-label">Nutrition Engine — Live</div>
+  </div>
+  <div class="status-item">
+    <div class="status-dot"></div>
+    <div class="status-label">Recovery Engine — In Development</div>
+  </div>
+  <div class="status-item">
+    <div class="status-dot"></div>
+    <div class="status-label">Performance Tracker — Planned</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Athlete<span>Edge</span> AI</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/nutrition">Nutrition</a></li>
+    <li><a href="/injuries">Recovery</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 AthleteEdge AI. MIT License.</div>
+</footer>
+
+</body>
+</html>

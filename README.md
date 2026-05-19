@@ -102,11 +102,7 @@ XGBoost regressors  →  daily targets: calories, protein, carbs, fat
 XGBoost classifiers →  micronutrient flags: iron / calcium / vit-D
       │
       ▼
-Greedy knapsack planner
-  - 5 meal slots: Breakfast · Lunch · Pre-workout · Dinner · Post-match
-  - Scores foods by protein density + micro bonus + calorie fit
-  - Filters by diet preference (veg / non-veg)
-  - Avoids repeating foods across slots
+Groq LLM for explanation + planning
       │
       ▼
 Formatted meal plan (text + structured dict)
@@ -193,6 +189,3 @@ AthleteEdge AI provides general nutritional guidance only. It is not a substitut
 
 ---
 
-## License
-
-MIT

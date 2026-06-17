@@ -25,13 +25,11 @@ pip-wheel-metadata/
 !.env.example
 !.env.sample
 
-# Generated data, trained models, and local outputs
+# Generated data and local outputs
 data/*.csv
 data/*.parquet
 data/*.pkl
-models/
 *.joblib
-*.pkl
 output.txt
 outputs/
 logs/
@@ -39,6 +37,11 @@ logs/
 
 # Keep curated JSON food database tracked
 !data/food_db.json
+
+# Keep trained deployment models tracked
+!models/
+!models/*.pkl
+!models/feature_list.pkl
 
 # Notebooks and notebook caches
 .ipynb_checkpoints/

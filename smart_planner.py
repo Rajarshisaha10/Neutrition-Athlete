@@ -406,11 +406,15 @@ Return exactly this JSON shape:
         response_format={"type": "json_object"},
     )
     reasoning = json.loads(response.choices[0].message.content)
+    if isinstance(reasoning, list):
+        reasoning = {"meal_reasons": reasoning}
+    elif not isinstance(reasoning, dict):
+        reasoning = {}
 
     reasons = {
         item.get("slot"): item.get("why", "")
         for item in reasoning.get("meal_reasons", [])
-        if item.get("slot") and item.get("why")
+        if isinstance(item, dict) and item.get("slot") and item.get("why")
     }
     for meal in plan["meals"]:
         if reasons.get(meal["slot"]):

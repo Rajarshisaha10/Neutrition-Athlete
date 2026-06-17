@@ -27,14 +27,18 @@ VALID_GOALS   = ["maintain", "bulk", "cut"]
 VALID_DIETS   = ["veg", "non-veg"]
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
 #  PAGE ROUTES
-# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.route("/")
 def home():
     """Landing page."""
     return render_template("index.html")
+
+
+@app.route("/health")
+def health():
+    """Lightweight health check for Render."""
+    return jsonify({"status": "ok"})
 
 
 @app.route("/nutrition")
@@ -49,9 +53,7 @@ def injuries():
     return render_template("injuries.html")
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
 #  API ROUTES
-# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.route("/api/sports", methods=["GET"])
 def api_sports():
@@ -122,11 +124,10 @@ def api_meal_plan():
         return jsonify({"error": f"Internal error: {exc}"}), 500
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
 #  RUN
-# ═══════════════════════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
     print(f"\n  AthleteEdge AI server running at http://localhost:{port}\n")
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=debug, host="0.0.0.0", port=port)

@@ -172,6 +172,26 @@ pytest tests/ -v
 
 ---
 
+## Deploying on Render
+
+This repo includes `render.yaml` for a Render Blueprint web service.
+
+1. Push the repo to GitHub.
+2. In Render, create a new Blueprint from the repository.
+3. Set the `GROQ_API_KEY` environment variable in Render.
+4. Deploy.
+
+Render uses:
+
+```bash
+pip install -r requirements.txt
+gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120
+```
+
+The app exposes `/health` for Render health checks. The `models/` directory must be committed because the API loads the trained XGBoost `.pkl` files at runtime.
+
+---
+
 ## Roadmap
 
 - [ ] 7-day meal rotation (no repeated plans)

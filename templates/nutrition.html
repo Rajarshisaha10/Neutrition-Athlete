@@ -7,6 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/nutrition.css">
+<link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#0F172A">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/static/sw.js');
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -25,6 +34,9 @@
   <div class="hero-bg-glow"></div>
   <div class="hero-tag">AI-Powered Nutrition Engine</div>
   <h1 class="hero-title">FUEL<br>YOUR <span class="accent">BODY</span></h1>
+  <div class="medical-disclaimer" style="background: var(--orange); color: white; padding: 12px; border-radius: 8px; margin: 15px auto; max-width: 600px; font-size: 0.9rem; font-weight: bold; border: 2px solid var(--red);">
+    ⚠️ MEDICAL DISCLAIMER: This is an AI-generated meal estimate. Always consult a certified sports nutritionist or doctor before significantly changing your diet, especially if you have pre-existing conditions.
+  </div>
   <p class="hero-desc">Enter your athlete profile. Our XGBoost models predict your exact macro targets, then build a 5-meal plan from affordable Indian foods.</p>
 </section>
 

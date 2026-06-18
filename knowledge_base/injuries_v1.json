@@ -1,0 +1,126 @@
+{
+  "version": "v1",
+  "injuries": {
+    "ACL Tear": {
+      "region": "knee",
+      "onset": ["sudden"],
+      "mechanisms": {"twisting": 3, "cutting": 3, "landing": 2},
+      "symptoms": {"swelling": 2, "popping_sound": 3, "instability": 3, "reduced_range_of_motion": 1, "weight_bearing_difficulty": 2},
+      "risk_sensitivity": 0.08,
+      "explanation_terms": ["Pain located in knee", "Twisting or cutting mechanism", "Audible pop", "Instability reported"]
+    },
+    "Meniscus Tear": {
+      "region": "knee",
+      "onset": ["sudden", "gradual"],
+      "mechanisms": {"twisting": 3, "squatting": 1, "cutting": 2},
+      "symptoms": {"locking": 3, "clicking": 2, "swelling": 1, "reduced_range_of_motion": 2, "pain_with_deep_bend": 2},
+      "risk_sensitivity": 0.05,
+      "explanation_terms": ["Pain located in knee", "Locking or catching reported", "Twisting mechanism"]
+    },
+    "MCL Sprain": {
+      "region": "knee",
+      "onset": ["sudden"],
+      "mechanisms": {"direct_impact": 3, "twisting": 2, "fall": 1},
+      "symptoms": {"swelling": 1, "instability": 2, "bruising": 1, "medial_pain": 3, "weight_bearing_difficulty": 1},
+      "risk_sensitivity": 0.04,
+      "explanation_terms": ["Pain located in knee", "Impact or twisting mechanism", "Instability reported"]
+    },
+    "Patellar Tendinopathy": {
+      "region": "knee",
+      "onset": ["gradual"],
+      "mechanisms": {"overuse": 3, "jumping": 3, "running": 1},
+      "symptoms": {"pain_with_jump": 3, "localized_tenderness": 2, "swelling": 1},
+      "risk_sensitivity": 0.10,
+      "explanation_terms": ["Gradual knee pain", "Jumping or overuse load", "Localized tendon tenderness"]
+    },
+    "Lateral Ankle Sprain": {
+      "region": "ankle",
+      "onset": ["sudden"],
+      "mechanisms": {"landing": 3, "twisting": 3, "cutting": 2, "fall": 1},
+      "symptoms": {"swelling": 2, "bruising": 2, "instability": 2, "weight_bearing_difficulty": 2},
+      "risk_sensitivity": 0.05,
+      "explanation_terms": ["Pain located in ankle", "Twisting or landing mechanism", "Swelling or bruising"]
+    },
+    "Achilles Tendinopathy": {
+      "region": "ankle",
+      "onset": ["gradual"],
+      "mechanisms": {"overuse": 3, "running": 2, "jumping": 2},
+      "symptoms": {"morning_stiffness": 3, "localized_tenderness": 2, "reduced_range_of_motion": 1},
+      "risk_sensitivity": 0.12,
+      "explanation_terms": ["Gradual ankle or heel pain", "Running or jumping load", "Morning stiffness"]
+    },
+    "Shin Splints": {
+      "region": "shin",
+      "onset": ["gradual"],
+      "mechanisms": {"running": 3, "overuse": 3, "jumping": 1},
+      "symptoms": {"localized_tenderness": 2, "pain_severity": 1},
+      "risk_sensitivity": 0.12,
+      "explanation_terms": ["Pain located in shin", "Gradual onset", "Running or overuse pattern"]
+    },
+    "Calf Strain": {
+      "region": "calf",
+      "onset": ["sudden"],
+      "mechanisms": {"sprinting": 3, "running": 2, "jumping": 1},
+      "symptoms": {"popping_sound": 1, "bruising": 1, "localized_tenderness": 2, "weight_bearing_difficulty": 2},
+      "risk_sensitivity": 0.07,
+      "explanation_terms": ["Pain located in calf", "Sprinting or running mechanism", "Tenderness or difficulty pushing off"]
+    },
+    "Hamstring Strain": {
+      "region": "hamstring",
+      "onset": ["sudden"],
+      "mechanisms": {"sprinting": 3, "running": 2, "jumping": 1},
+      "symptoms": {"popping_sound": 1, "bruising": 2, "localized_tenderness": 2, "reduced_range_of_motion": 2},
+      "risk_sensitivity": 0.08,
+      "explanation_terms": ["Pain located in hamstring", "Sprinting mechanism", "Reduced range of motion"]
+    },
+    "Quadriceps Strain": {
+      "region": "thigh",
+      "onset": ["sudden"],
+      "mechanisms": {"sprinting": 2, "kicking": 3, "jumping": 1, "direct_impact": 1},
+      "symptoms": {"bruising": 1, "localized_tenderness": 2, "reduced_range_of_motion": 2},
+      "risk_sensitivity": 0.06,
+      "explanation_terms": ["Pain located in thigh", "Kicking or sprinting mechanism", "Tenderness reported"]
+    },
+    "Rotator Cuff Injury": {
+      "region": "shoulder",
+      "onset": ["sudden", "gradual"],
+      "mechanisms": {"throwing": 3, "fall": 2, "overuse": 2},
+      "symptoms": {"reduced_range_of_motion": 2, "weakness": 3, "night_pain": 2},
+      "risk_sensitivity": 0.06,
+      "explanation_terms": ["Pain located in shoulder", "Throwing or fall mechanism", "Weakness reported"]
+    },
+    "Shoulder Impingement": {
+      "region": "shoulder",
+      "onset": ["gradual"],
+      "mechanisms": {"throwing": 3, "overuse": 3},
+      "symptoms": {"reduced_range_of_motion": 2, "pain_overhead": 3, "night_pain": 1},
+      "risk_sensitivity": 0.08,
+      "explanation_terms": ["Gradual shoulder pain", "Overhead activity", "Reduced range of motion"]
+    },
+    "Tennis Elbow": {
+      "region": "elbow",
+      "onset": ["gradual"],
+      "mechanisms": {"throwing": 1, "overuse": 3},
+      "symptoms": {"localized_tenderness": 3, "grip_pain": 3},
+      "risk_sensitivity": 0.06,
+      "explanation_terms": ["Pain located in elbow", "Overuse pattern", "Grip-related pain"]
+    },
+    "Lumbar Strain": {
+      "region": "back",
+      "onset": ["sudden", "gradual"],
+      "mechanisms": {"fall": 1, "direct_impact": 1, "twisting": 2, "overuse": 2},
+      "symptoms": {"reduced_range_of_motion": 2, "localized_tenderness": 2, "pain_severity": 1},
+      "risk_sensitivity": 0.05,
+      "explanation_terms": ["Pain located in back", "Twisting or overload pattern", "Reduced range of motion"]
+    },
+    "Concussion": {
+      "region": "head",
+      "onset": ["sudden"],
+      "mechanisms": {"direct_impact": 3, "fall": 3},
+      "symptoms": {"dizziness": 3, "headache": 3, "confusion": 3, "nausea": 2, "loss_of_consciousness": 4},
+      "risk_sensitivity": 0.0,
+      "red_flags": ["loss_of_consciousness", "confusion", "worsening_headache", "repeated_vomiting"],
+      "explanation_terms": ["Head impact", "Headache or dizziness", "Confusion or loss of consciousness reported"]
+    }
+  }
+}

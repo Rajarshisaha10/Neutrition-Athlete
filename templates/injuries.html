@@ -1,526 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Injury Recovery — AthleteEdge AI</title>
-<meta name="description" content="AthleteEdge AI Injury Recovery engine — sport-specific recovery guidance for Indian athletes. Currently under development.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style>
-:root {
-  --black: #050505;
-  --white: #F5F0E8;
-  --lime: #C8FF00;
-  --orange: #FF5C1A;
-  --teal: #00E5B4;
-  --red: #FF2D2D;
-  --muted: #2A2A2A;
-  --border: rgba(245,240,232,0.1);
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'Syne', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AthleteEdge AI injury risk signal console for athlete monitoring and overtraining prevention."
+    />
+    <title>Injury Support — AthleteEdge AI</title>
+    <!-- Fonts for the Nav -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/injuries.css" />
+    <link rel="manifest" href="/static/manifest.json" />
+    <meta name="theme-color" content="#0F172A" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/static/sw.js');
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Top Nav -->
+    <nav>
+      <a href="/" class="nav-logo">Athlete<span>Edge</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/nutrition">Nutrition</a></li>
+        <li><a href="/injuries" class="active">Injuries</a></li>
+      </ul>
+      <a href="/nutrition" class="nav-cta">Get meal plan</a>
+    </nav>
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+    <div class="app-shell">
+      <div class="progress-line"></div>
+      <div class="mesh-field" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
 
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+      <aside class="side-rail" aria-label="Assessment navigation">
+        <div class="side-brand">
+          <span class="brand-mark">AE</span>
+          <div>
+            <strong>AthleteEdge AI</strong>
+            <span>Decision support</span>
+          </div>
+        </div>
+        <div class="side-nav" aria-label="Assessment mode">
+          <button class="active" type="button" id="risk-mode">
+            <span>Risk Signal</span>
+            <small>Readiness and workload</small>
+          </button>
+          <button type="button" id="diagnosis-mode">
+            <span>Injury Support</span>
+            <small>Symptoms and mechanism</small>
+          </button>
+        </div>
+      </aside>
 
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 4rem;
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-  background: rgba(5,5,5,0.7);
-}
+      <main class="risk-section page-section">
+        <section class="section-intro">
+          <p class="field-label">Diagnostic chamber / injury risk</p>
+          <h1 id="hero-title">Risk signal.</h1>
+          <div class="medical-disclaimer" style="background: var(--orange); color: white; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 0.9rem; font-weight: bold; border: 2px solid var(--red);">
+            ⚠️ MEDICAL DISCLAIMER: This is an AI-generated estimate only. Always consult a qualified medical professional, physiotherapist, or doctor before making any decisions about returning to play or treating an injury.
+          </div>
+          <p class="hero-sub">
+            <span id="hero-copy">Enter simple athlete details one step at a time. Each screen explains how to estimate the value without sensors, so coaches and village athletes can use the model with everyday observations.</span>
+          </p>
+        </section>
 
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  letter-spacing: 0.05em;
-  color: var(--white);
-  text-decoration: none;
-}
-.nav-logo span { color: var(--lime); }
+        <section class="lab-grid" aria-label="Injury risk prediction console">
+          <form id="risk-form" class="diagnostic-console">
+            <div class="console-head">
+              <div>
+                <p class="field-label" id="wizard-label">Athlete metrics uplink</p>
+                <h2 id="wizard-title">Start readiness profile.</h2>
+              </div>
+              <button class="ghost-button" type="button" id="load-sample">Load sample</button>
+            </div>
 
-.nav-links {
-  display: flex;
-  gap: 3rem;
-  list-style: none;
-}
-.nav-links a {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: rgba(245,240,232,0.5);
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--lime); }
-.nav-links a.active { color: var(--lime); }
+            <div class="wizard-progress" aria-label="Progress">
+              <span id="step-count">Ready</span>
+              <div><i id="step-bar"></i></div>
+            </div>
 
-.nav-cta {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--lime);
-  color: var(--black);
-  padding: 0.6rem 1.5rem;
-  border: none;
-  font-weight: 400;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.nav-cta:hover { background: var(--white); }
+            <div id="start-panel" class="start-panel">
+              <p>
+                This guided form asks for sport, age, body size, training load, sleep, hydration, stress, recovery, and fatigue. Use honest estimates from the last training day or the last 24 hours.
+              </p>
+              <button class="start-button" type="button" id="start-wizard">Start input</button>
+            </div>
 
-/* ── MAIN CONTENT ── */
-.maintenance-wrapper {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8rem 2rem 4rem;
-  position: relative;
-  overflow: hidden;
-}
+            <div id="wizard-panel" class="wizard-panel" hidden>
+              <p class="field-label" id="metric-category">Readiness input</p>
+              <h3 id="metric-title">Metric name</h3>
+              <p class="metric-help" id="metric-help">Metric explanation</p>
+              <div class="village-guide">
+                <span>How to estimate</span>
+                <p id="metric-guide">Use a simple observation.</p>
+              </div>
+              <label id="metric-label">
+                <span id="metric-label-text">Value</span>
+                <span id="metric-control"></span>
+              </label>
+            </div>
 
-/* Background animated grid */
-.grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridShift 20s linear infinite;
-}
+            <div id="review-panel" class="review-panel" hidden>
+              <p class="field-label">Profile review</p>
+              <h3 id="review-title">Ready to scan.</h3>
+              <p class="metric-help" id="review-copy">Check the values below. If something looks wrong, go back and adjust it before sending the profile.</p>
+              <div id="review-list" class="review-list"></div>
+            </div>
 
-@keyframes gridShift {
-  from { transform: translate(0, 0); }
-  to { transform: translate(60px, 60px); }
-}
+            <div class="transmit-row">
+              <p id="status-text">API: waiting for input</p>
+              <div class="wizard-actions">
+                <button class="ghost-button" type="button" id="prev-step" hidden>Back</button>
+                <button class="ghost-button" type="button" id="next-step" hidden>Next</button>
+                <button type="submit" id="submit-scan" hidden>Run risk scan</button>
+              </div>
+            </div>
+          </form>
 
-/* Floating particles */
-.particle {
-  position: absolute;
-  width: 4px; height: 4px;
-  background: var(--lime);
-  border-radius: 50%;
-  opacity: 0;
-  animation: particleFloat 8s ease-in-out infinite;
-}
-.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; top: 60%; animation-delay: 1.5s; }
-.particle:nth-child(3) { left: 70%; top: 30%; animation-delay: 3s; }
-.particle:nth-child(4) { left: 85%; top: 70%; animation-delay: 4.5s; }
-.particle:nth-child(5) { left: 50%; top: 45%; animation-delay: 6s; }
-.particle:nth-child(6) { left: 20%; top: 80%; animation-delay: 2s; }
-.particle:nth-child(7) { left: 60%; top: 15%; animation-delay: 5s; }
-.particle:nth-child(8) { left: 90%; top: 50%; animation-delay: 7s; }
+          <aside class="result-intel" aria-live="polite">
+            <div class="risk-orbit">
+              <div class="risk-value" id="risk-probability">--</div>
+              <span id="risk-level">Awaiting signal</span>
+            </div>
 
-@keyframes particleFloat {
-  0% { opacity: 0; transform: translateY(0) scale(1); }
-  20% { opacity: 0.6; }
-  50% { opacity: 0.3; transform: translateY(-40px) scale(1.5); }
-  80% { opacity: 0.5; }
-  100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
-}
+            <div class="metric-stack">
+              <div class="metric-ticker">
+                <span>Confidence</span>
+                <strong id="confidence">--</strong>
+              </div>
+              <div class="metric-ticker">
+                <span>Decision threshold</span>
+                <strong id="threshold">--</strong>
+              </div>
+              <div class="metric-ticker">
+                <span>Model state</span>
+                <strong id="model-state">Checking</strong>
+              </div>
+            </div>
 
-.maintenance-card {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 700px;
-  padding: 5rem 4rem;
-  background: rgba(42,42,42,0.4);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-}
+            <div class="body-map-panel">
+              <div>
+                <p class="field-label">Sport stress map</p>
+                <strong id="body-map-sport">Soccer</strong>
+              </div>
+              <div class="body-map">
+                <svg viewBox="0 0 220 360" role="img" aria-label="Body area risk map">
+                  <defs>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <circle class="map-head" cx="110" cy="36" r="22" />
+                  <path class="map-line" d="M110 60 L110 132" />
+                  <path class="map-line" d="M68 92 L152 92" />
+                  <path class="map-line" d="M84 94 L70 158" />
+                  <path class="map-line" d="M136 94 L150 158" />
+                  <path class="map-line" d="M110 132 L84 226" />
+                  <path class="map-line" d="M110 132 L136 226" />
+                  <path class="map-line" d="M84 226 L76 312" />
+                  <path class="map-line" d="M136 226 L144 312" />
+                  <g id="body-map-points"></g>
+                </svg>
+              </div>
+              <div id="body-area-list" class="body-area-list"></div>
+            </div>
 
-.maintenance-card::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 3rem;
-  width: 80px; height: 2px;
-  background: var(--orange);
-}
+            <div class="factor-panel">
+              <p class="field-label">Top risk factors</p>
+              <ul id="risk-factors">
+                <li>Complete the guided inputs to generate model reasoning.</li>
+              </ul>
+            </div>
 
-.maintenance-card::after {
-  content: '';
-  position: absolute;
-  bottom: -1px; right: 3rem;
-  width: 80px; height: 2px;
-  background: var(--orange);
-}
-
-.maint-icon {
-  width: 100px; height: 100px;
-  margin: 0 auto 2.5rem;
-  position: relative;
-}
-
-.wrench {
-  font-size: 3.5rem;
-  display: block;
-  animation: wrenchSpin 4s ease-in-out infinite;
-}
-
-@keyframes wrenchSpin {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-15deg); }
-}
-
-.pulse-ring {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px; height: 80px;
-  border: 1px solid rgba(255,92,26,0.3);
-  border-radius: 50%;
-  animation: pulseRing 3s ease-out infinite;
-}
-
-.pulse-ring:nth-child(2) { animation-delay: 1s; }
-.pulse-ring:nth-child(3) { animation-delay: 2s; }
-
-@keyframes pulseRing {
-  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
-}
-
-.maint-tag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.maint-tag .dot {
-  width: 6px; height: 6px;
-  background: var(--orange);
-  border-radius: 50%;
-  animation: blink 1.5s ease-in-out infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
-}
-
-.maint-title {
-  font-family: var(--font-display);
-  font-size: clamp(48px, 6vw, 80px);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  margin-bottom: 1.5rem;
-}
-
-.maint-title .orange { color: var(--orange); }
-.maint-title .stroke {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--white);
-}
-
-.maint-desc {
-  font-size: 1rem;
-  color: rgba(245,240,232,0.55);
-  line-height: 1.8;
-  max-width: 480px;
-  margin: 0 auto 2.5rem;
-}
-
-.maint-features {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.maint-feature {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255,92,26,0.06);
-  border: 1px solid rgba(255,92,26,0.15);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.6);
-}
-
-.maint-feature .icon { font-size: 0.9rem; }
-
-.maint-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: var(--lime);
-  color: var(--black);
-  padding: 1rem 2.5rem;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: 400;
-  transition: all 0.2s;
-  display: inline-block;
-}
-.btn-primary:hover {
-  background: var(--white);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--orange);
-}
-
-.btn-secondary {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--white);
-  padding: 1rem 2.5rem;
-  border: 1px solid rgba(245,240,232,0.25);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-  display: inline-block;
-}
-.btn-secondary:hover {
-  border-color: var(--white);
-  background: rgba(245,240,232,0.05);
-}
-
-/* ── STATUS BAR ── */
-.status-bar {
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid var(--border);
-  padding: 1.5rem 4rem;
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
-}
-
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.status-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--orange);
-}
-.status-dot.active { background: var(--teal); }
-
-.status-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.4);
-}
-
-/* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 3rem 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  letter-spacing: 0.05em;
-}
-.footer-logo span { color: var(--lime); }
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.footer-links a {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.35);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--lime); }
-
-.footer-copy {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  color: rgba(245,240,232,0.2);
-}
-
-/* ── NOISE OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9997;
-  opacity: 0.35;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  nav { padding: 1.25rem 2rem; }
-  .nav-links { display: none; }
-  .maintenance-card { padding: 3rem 2rem; }
-  .status-bar { padding: 1.5rem 2rem; gap: 2rem; }
-  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">Athlete<span>Edge</span></a>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/nutrition">Nutrition</a></li>
-    <li><a href="/injuries" class="active">Injuries</a></li>
-  </ul>
-  <a href="/nutrition" class="nav-cta">Get meal plan</a>
-</nav>
-
-<!-- MAIN -->
-<div class="maintenance-wrapper">
-  <div class="grid-bg"></div>
-
-  <!-- Floating particles -->
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-
-  <div class="maintenance-card">
-    <div class="maint-icon">
-      <div class="pulse-ring"></div>
-      <div class="pulse-ring"></div>
-      <div class="pulse-ring"></div>
-      <span class="wrench">🔧</span>
+            <div class="diagnosis-panel" id="diagnosis-panel" hidden>
+              <p class="field-label">Likely injury estimates</p>
+              <div id="diagnosis-predictions" class="diagnosis-predictions">
+                <p>Switch to Injury Support and complete the questionnaire to estimate likely injuries.</p>
+              </div>
+              <div class="diagnosis-reasoning">
+                <p class="field-label">Reasoning trace</p>
+                <ul id="diagnosis-reasoning">
+                  <li>Awaiting questionnaire.</li>
+                </ul>
+              </div>
+              <form id="confirm-form" class="confirm-form" hidden>
+                <label>Confirmed diagnosis
+                  <select id="confirmed-diagnosis"></select>
+                </label>
+                <label>Clinician type
+                  <select id="clinician-type">
+                    <option>Doctor</option>
+                    <option>Physio</option>
+                    <option>Sports trainer</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <button type="submit">Store confirmation</button>
+              </form>
+              <form id="feedback-form" class="feedback-form" hidden>
+                <label>Was this useful?
+                  <select id="feedback-helpful">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </label>
+                <label>Rating
+                  <select id="feedback-rating">
+                    <option>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                  </select>
+                </label>
+                <button type="submit">Send feedback</button>
+              </form>
+            </div>
+          </aside>
+        </section>
+      </main>
     </div>
 
-    <div class="maint-tag">
-      <span class="dot"></span>
-      Under Development
-      <span class="dot"></span>
-    </div>
+    <footer>
+      <div class="footer-logo">Athlete<span>Edge</span> AI</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/nutrition">Nutrition</a></li>
+        <li><a href="/injuries">Recovery</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 AthleteEdge AI. MIT License.</div>
+    </footer>
 
-    <h1 class="maint-title">
-      RECOVERY<br>
-      <span class="orange">ENGINE</span><br>
-      <span class="stroke">COMING</span><br>
-      SOON
-    </h1>
-
-    <p class="maint-desc">
-      Our AI-powered injury recovery module is being built. Sport-specific recovery protocols, 
-      rehabilitation exercises, and return-to-play guidance — all free, all in your language.
-    </p>
-
-    <div class="maint-features">
-      <div class="maint-feature">
-        <span class="icon">🩹</span> Injury Assessment
-      </div>
-      <div class="maint-feature">
-        <span class="icon">🏥</span> Recovery Protocols
-      </div>
-      <div class="maint-feature">
-        <span class="icon">📋</span> Rehab Exercises
-      </div>
-      <div class="maint-feature">
-        <span class="icon">🔄</span> Return-to-Play
-      </div>
-    </div>
-
-    <div class="maint-actions">
-      <a href="/nutrition" class="btn-primary">Try Nutrition Engine →</a>
-      <a href="/" class="btn-secondary">Back to Home</a>
-    </div>
-  </div>
-</div>
-
-<!-- STATUS BAR -->
-<div class="status-bar">
-  <div class="status-item">
-    <div class="status-dot active"></div>
-    <div class="status-label">Nutrition Engine — Live</div>
-  </div>
-  <div class="status-item">
-    <div class="status-dot"></div>
-    <div class="status-label">Recovery Engine — In Development</div>
-  </div>
-  <div class="status-item">
-    <div class="status-dot"></div>
-    <div class="status-label">Performance Tracker — Planned</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Athlete<span>Edge</span> AI</div>
-  <ul class="footer-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/nutrition">Nutrition</a></li>
-    <li><a href="/injuries">Recovery</a></li>
-  </ul>
-  <div class="footer-copy">© 2025 AthleteEdge AI. MIT License.</div>
-</footer>
-
-</body>
+    <script src="/static/injuries.js"></script>
+  </body>
 </html>
+

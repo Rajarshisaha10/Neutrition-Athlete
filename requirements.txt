@@ -8,3 +8,7 @@ flask-cors
 groq
 python-dotenv
 gunicorn
+pydantic>=2.7.0,<3
+catboost==1.2.10
+PyYAML>=6.0.1,<7
+SQLAlchemy>=2.0.25,<2.1

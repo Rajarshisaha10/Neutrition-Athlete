@@ -1,0 +1,1 @@
+"""Feedback and confirmation capture."""

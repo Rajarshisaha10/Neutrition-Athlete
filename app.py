@@ -15,6 +15,14 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from smart_planner import get_smart_meal_plan
 
+# Injury backend imports
+from src.database.repository import DiagnosisRepository
+from src.diagnosis_model.hybrid import DiagnosisEngine
+from src.feedback.service import FeedbackService
+from src.inference import InjuryRiskPredictor
+from src.questionnaire.schemas import ConfirmationRequest, DiagnosisRequest, FeedbackRequest
+
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -25,6 +33,29 @@ VALID_SPORTS  = ["Cricket", "Football", "Kabaddi", "Athletics", "Wrestling", "Ba
 VALID_GENDERS = ["male", "female"]
 VALID_GOALS   = ["maintain", "bulk", "cut"]
 VALID_DIETS   = ["veg", "non-veg"]
+
+# ─── Lazy Loaded Injury Engines ───
+_predictor = None
+_diagnosis_engine = None
+_diagnosis_repository = None
+
+def get_predictor():
+    global _predictor
+    if _predictor is None:
+        _predictor = InjuryRiskPredictor()
+    return _predictor
+
+def get_diagnosis_engine():
+    global _diagnosis_engine
+    if _diagnosis_engine is None:
+        _diagnosis_engine = DiagnosisEngine()
+    return _diagnosis_engine
+
+def get_diagnosis_repository():
+    global _diagnosis_repository
+    if _diagnosis_repository is None:
+        _diagnosis_repository = DiagnosisRepository()
+    return _diagnosis_repository
 
 
 #  PAGE ROUTES
@@ -122,6 +153,74 @@ def api_meal_plan():
     except Exception as exc:
         traceback.print_exc()
         return jsonify({"error": f"Internal error: {exc}"}), 500
+
+
+# ─── INJURY API ROUTES ───
+
+@app.route("/api/predict", methods=["POST"])
+def api_predict():
+    data = request.get_json(force=True)
+    try:
+        if "metrics" in data and isinstance(data["metrics"], dict):
+            metrics = data.pop("metrics")
+            data.update(metrics)
+        return jsonify(get_predictor().predict_one(data))
+    except Exception as exc:
+        traceback.print_exc()
+        return jsonify({"error": str(exc)}), 400
+
+@app.route("/api/batch_predict", methods=["POST"])
+def api_batch_predict():
+    data = request.get_json(force=True)
+    try:
+        return jsonify({"predictions": get_predictor().predict_batch(data)})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 400
+
+@app.route("/api/diagnose", methods=["POST"])
+def api_diagnose():
+    data = request.get_json(force=True)
+    try:
+        payload = DiagnosisRequest(**data)
+        response = get_diagnosis_engine().diagnose(payload)
+        try:
+            get_diagnosis_repository().store_assessment(payload, response)
+        except Exception:
+            pass
+        return jsonify(response.model_dump())
+    except Exception as exc:
+        traceback.print_exc()
+        return jsonify({"error": str(exc)}), 400
+
+@app.route("/api/confirm-diagnosis", methods=["POST"])
+def api_confirm_diagnosis():
+    data = request.get_json(force=True)
+    try:
+        payload = ConfirmationRequest(**data)
+        result = FeedbackService(get_diagnosis_repository()).confirm_diagnosis(payload)
+        return jsonify(result)
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 400
+
+@app.route("/api/feedback", methods=["POST"])
+def api_feedback():
+    data = request.get_json(force=True)
+    try:
+        payload = FeedbackRequest(**data)
+        result = FeedbackService(get_diagnosis_repository()).store_feedback(payload)
+        return jsonify(result)
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 400
+
+@app.route("/api/assessment/<assessment_id>", methods=["GET"])
+def api_get_assessment(assessment_id):
+    try:
+        assessment = get_diagnosis_repository().get_assessment(assessment_id)
+        if assessment is None:
+            return jsonify({"error": "Assessment not found"}), 404
+        return jsonify(assessment)
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 400
 
 
 #  RUN

@@ -138,7 +138,9 @@ DIET_ENC   = {"veg": 0, "non-veg": 1}
 # 4.  MODEL LOADER
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def load_models(model_dir="models"):
+def load_models(model_dir=None):
+    if model_dir is None:
+        model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
     models = {}
     for key in ["calories", "protein", "carbs", "fat",
                 "needs_iron", "needs_calcium", "needs_vitd"]:

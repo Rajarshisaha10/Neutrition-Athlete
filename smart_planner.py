@@ -427,7 +427,6 @@ Return exactly this JSON shape:
 # =========================================================================
 #  MAIN ENTRY POINT
 # =========================================================================
-
 def get_smart_meal_plan(profile: dict, model_dir: str = "models",
                         budget: str = "medium") -> dict:
     """

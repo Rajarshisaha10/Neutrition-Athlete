@@ -10,9 +10,11 @@ Run:
 
 import os
 import traceback
+import json
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from groq import Groq
 from smart_planner import get_smart_meal_plan
 
 # Injury backend imports
@@ -221,6 +223,50 @@ def api_get_assessment(assessment_id):
         return jsonify(assessment)
     except Exception as exc:
         return jsonify({"error": str(exc)}), 400
+
+
+# ─── CHATBOT API ───
+
+_chat_client = None
+
+def get_chat_client():
+    global _chat_client
+    if _chat_client is None:
+        _chat_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+    return _chat_client
+
+@app.route("/api/chat", methods=["POST"])
+def api_chat():
+    data = request.get_json(force=True)
+    messages = data.get("messages", [])
+    context = data.get("context", {})
+
+    if not messages:
+        return jsonify({"error": "No messages provided"}), 400
+
+    system_prompt = (
+        "You are the AthleteEdge AI Sports Doctor and Nutritionist. You help rural and tier-2/3 Indian athletes with their fitness, nutrition, and injury concerns. "
+        "You are friendly, accessible, and knowledgeable. "
+        "IMPORTANT: You are an AI, not a human doctor. Always advise the user to consult a real medical professional for serious injuries or conditions.\n\n"
+    )
+
+    if context:
+        system_prompt += f"Context about the user's latest data:\n{json.dumps(context, indent=2)}\n\n"
+        system_prompt += "Use this context to personalize your advice if relevant to their questions."
+
+    full_messages = [{"role": "system", "content": system_prompt}] + messages
+
+    try:
+        completion = get_chat_client().chat.completions.create(
+            messages=full_messages,
+            model="llama-3.3-70b-versatile",
+            temperature=0.5,
+            max_tokens=500,
+        )
+        return jsonify({"reply": completion.choices[0].message.content})
+    except Exception as exc:
+        traceback.print_exc()
+        return jsonify({"error": str(exc)}), 500
 
 
 #  RUN

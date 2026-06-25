@@ -437,6 +437,7 @@ form.addEventListener("submit", async (event) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "Prediction failed");
       renderRiskResult(data);
+      localStorage.setItem('athleteedge_risk_context', JSON.stringify({risk: data}));
     } else {
       const riskResponse = await fetch(`${API_BASE}/predict`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(riskPayload()) });
       const riskData = riskResponse.ok ? await riskResponse.json() : null;
@@ -445,6 +446,7 @@ form.addEventListener("submit", async (event) => {
       if (!response.ok) throw new Error(data.detail || "Diagnosis failed");
       renderRiskResult(riskData || {});
       renderDiagnosisResult(data);
+      localStorage.setItem('athleteedge_risk_context', JSON.stringify({risk: riskData, diagnosis: data}));
     }
     hasPrediction = true;
     currentStep = activeSteps().length;

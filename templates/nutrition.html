@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/nutrition.css">
+<link rel="stylesheet" href="/static/chat.css">
 <link rel="manifest" href="/static/manifest.json">
 <meta name="theme-color" content="#0F172A">
 <script>
@@ -230,6 +231,10 @@ document.getElementById('mealForm').addEventListener('submit', async e => {
     });
     const data = await resp.json();
     if (!resp.ok || data.error) throw new Error(data.error || 'Server error');
+    
+    // Save to localStorage for chatbot context
+    localStorage.setItem('athleteedge_nutrition_context', JSON.stringify(data));
+    
     renderResults(data);
   } catch (err) {
     errBanner.style.display = 'flex';
@@ -307,6 +312,7 @@ function renderResults(data) {
   results.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
+<script src="/static/chat.js"></script>
 </body>
 </html>
 
